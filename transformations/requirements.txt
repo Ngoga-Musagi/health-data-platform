@@ -1,0 +1,3 @@
+pandas
+minio
+psycopg2-binary
