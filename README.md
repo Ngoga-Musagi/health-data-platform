@@ -45,13 +45,14 @@ Quick transform test: `docker compose run --rm -e MAX_ROWS=5000 transformer`
 
 ## Tests
 
-```bash
-# Unit (data quality) – from project root, with deps installed
-pytest tests/test_unit.py -v
+**In Docker** (recommended; uses `postgres` host):
 
-# Integration (warehouse) – after ./run.sh pipeline
-pytest tests/test_integration.py -v
+```bash
+./run.sh up        # start Postgres (and optionally run pipeline to load data)
+./run.sh test      # unit + integration (integration needs data: run pipeline first)
 ```
+
+**Locally:** `pip install -r tests/requirements.txt` then `pytest tests/ -v`. Integration test needs Postgres with data; use `POSTGRES_HOST=localhost` if Postgres is in Docker.
 
 ---
 

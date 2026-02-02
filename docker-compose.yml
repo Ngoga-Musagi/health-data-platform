@@ -48,6 +48,21 @@ services:
       POSTGRES_USER: warehouse_user
       POSTGRES_PASSWORD: warehouse_pass
 
+  test:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    container_name: test
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: warehouse
+      POSTGRES_USER: warehouse_user
+      POSTGRES_PASSWORD: warehouse_pass
+    volumes:
+      - .:/app
+
   dbt:
     build: ./dbt
     container_name: dbt

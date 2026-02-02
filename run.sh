@@ -28,6 +28,9 @@ case "$cmd" in
   ml)
     docker compose run --rm ml
     ;;
+  test)
+    docker compose run --rm test
+    ;;
   logs)
     docker compose logs -f
     ;;
@@ -40,7 +43,7 @@ case "$cmd" in
     echo "Full pipeline completed successfully"
     ;;
   *)
-    echo "Usage: $0 {up|down|pipeline|ingest|transform|dbt-run|dbt-test|ml|logs}"
+    echo "Usage: $0 {up|down|pipeline|ingest|transform|dbt-run|dbt-test|ml|test|logs}"
     exit 1
     ;;
 esac
