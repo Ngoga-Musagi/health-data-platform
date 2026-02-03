@@ -47,9 +47,7 @@ Separate dev, staging, and prod environments using isolated namespaces and datab
 
 ### Overview
 
-The local Docker Compose–based platform represents a single-node development environment. In a production AWS deployment, the platform would be migrated to managed and container-native AWS services to improve scalability, reliability, security, and operational efficiency. The logical flow remains: **Source → Raw Storage → Transform → Warehouse → Analytics
-                                                                                                                     |
-                                                                                                                     ML**.
+The local Docker Compose–based platform represents a single-node development environment. In a production AWS deployment, the platform would be migrated to managed and container-native AWS services to improve scalability, reliability, security, and operational efficiency.
 
 ### AWS Service Mapping
 
@@ -114,4 +112,5 @@ Pipeline execution would be orchestrated using **Argo Workflows** (on EKS) or **
 ### Why AWS Managed Services
 
 Managed AWS services reduce operational overhead, improve reliability, and provide built-in security and scalability. This allows the platform team to focus on data quality, analytics, and ML value delivery rather than infrastructure maintenance.
+
 
