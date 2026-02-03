@@ -28,12 +28,11 @@ A Makefile was selected as the primary orchestration mechanism to provide a simp
 
 A lightweight testing strategy was implemented: a unit test validates data quality logic (validation function), and an integration-style test verifies that data was successfully loaded into the warehouse after pipeline execution. This balances confidence in correctness with execution simplicity and CI/CD compatibility.
 
-## Limitations
+## Assumptions and Limitations
 
-- Single-node deployment (Docker Compose).
-- No incremental processing; each run ingests and processes full dataset.
-- No access control or authentication on services.
-- MLflow uses SQLite and local artifact storage (suitable for assessment; production would use managed store).
+**Assumptions (trade-offs):** WHO GHO API is stable and publicly available; data is batch-only (no real-time requirement); analytics and ML can run on a single mart table; Docker Compose is sufficient for assessment/demo. We assume future production will use managed storage (S3, RDS) and Kubernetes.
+
+**Limitations:** Single-node deployment (Docker Compose). No incremental processing; each run ingests and processes the full dataset. No access control or authentication on services. MLflow uses SQLite and local artifact storage (suitable for assessment; production would use a managed store).
 
 ## Scaling Strategy
 
@@ -45,6 +44,13 @@ A lightweight testing strategy was implemented: a unit test validates data quali
 
 ## Security Approach
 
-- Secrets supplied via environment variables (in production: Secrets Manager / Vault).
-- TLS termination at ingress (future).
-- Role-based database access and least-privilege IAM for cloud deployment.
+- **Secrets:** Supplied via environment variables in the current setup; in production, use a secrets store (e.g. AWS Secrets Manager, HashiCorp Vault) and inject at runtime.
+- **Transport and access:** TLS termination at ingress (future); role-based database access and least-privilege IAM for cloud deployment.
+- **Network:** Private subnets for compute and data; security groups/network policies to restrict access by role.
+
+## ML Evolution
+
+- **Current:** Batch training jobs; MLflow for experiment tracking (parameters, metrics, artifacts); model artifacts in object storage.
+- **Short-term:** Model registry (e.g. MLflow Model Registry); scheduled retraining via orchestration (CronJobs/Argo).
+- **Medium-term:** Feature store; data/model drift detection; canary or shadow deployments for new models.
+- **Long-term:** Online inference endpoints; automated rollback via model versioning; full lifecycle governance and A/B testing.

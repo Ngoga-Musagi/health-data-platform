@@ -2,6 +2,10 @@
 
 Containerized pipeline: WHO GHO API → MinIO → PostgreSQL → dbt → ML (scikit-learn + MLflow). Observability: Loki, Promtail, Grafana.
 
+## High-Level Architecture
+
+![High-Level Architecture](Architecture-c.png)
+
 ---
 
 ## How to Run
