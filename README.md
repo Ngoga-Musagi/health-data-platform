@@ -8,6 +8,15 @@ Containerized pipeline: WHO GHO API → MinIO → PostgreSQL → dbt → ML (sci
 
 ---
 
+## Clone
+
+```bash
+git clone https://github.com/Ngoga-Musagi/health-data-platform.git
+cd health-data-platform
+```
+
+---
+
 ## How to Run
 
 **Prerequisites:** Docker, Bash (e.g. Git Bash on Windows).
